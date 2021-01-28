@@ -32,7 +32,7 @@ vi /etc/rabbitmq/rabbitmq.config
 rabbitmq-plugins enable rabbitmq_management
 ~~~
 
-![image-20210114142902350](C:\Users\Administrator.MM-202008042005\AppData\Roaming\Typora\typora-user-images\image-20210114142902350.png)
+![rabbitconfig配置文件](.\image\rabbitconfig配置文件.png)
 
 
 
@@ -51,6 +51,52 @@ systemctl restart rabbitmq-server
 # 关闭
 systemctl stop rabbitmq-server
 ~~~
+
+## 基本知识
+
+### 1 AMQP协议模型
+
+
+
+![AMQP协议图解](.\image\AMQP协议图解.png)
+
+
+
+### 2 RabbitMQ模型
+
+![RabbitMQ模型](.\image\RabbitMQ模型.png)
+
+### 3 常用交换机
+
+RabbitMQ常用的交换器类型有==direct==、==topic==、==fanout==、headers四种。
+
+==Direct Exchange==
+
+该类型的交换器将所有发送到该交换器的消息被转发到RoutingKey指定的队列中，也就是说路由到BindingKey和RoutingKey完全匹配的队列中。
+
+![DirectExchange](.\image\DirectExchange.png)
+
+==Topic Exchange==
+
+该类型的交换器将所有发送到Topic Exchange的消息被转发到所有RoutingKey中指定的Topic的队列上面。
+
+Exchange将RoutingKey和某Topic进行模糊匹配，其中“\*” 用来匹配一个词，“#”用于匹配一个或者多个词。例如“com.#”能匹配到“com.rabbitmq.oa”和“com.rabbitmq”；而"login.*"只能匹配到“com.rabbitmq”。
+
+![TopicExchange](.\image\TopicExchange.png)
+
+==Fanout Exchange==
+
+该类型不处理路由键，会把所有发送到交换器的消息路由到所有绑定的队列中。优点是转发消息最快，性能最好。
+
+![FanoutExchange](.\image\FanoutExchange.png)
+
+
+
+
+
+
+
+
 
 
 
